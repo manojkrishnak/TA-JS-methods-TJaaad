@@ -123,16 +123,10 @@ log(firstName)
 let fullName = customers.map(cust => cust.firstname + " "+cust.lastname);
 log(fullName)
 // - Sort the array created above alphabetically
-// fullName.sort(function(a, b){
-//   var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase();
-//   if (nameA < nameB) //sort string ascending
-//    return -1;
-//   if (nameA > nameB)
-//    return 1;
-//   return 0; //default return value (no sorting)
-//  });
-// log(fullName)
-// - Create a new array that contains only user who has at least one vowel in the firstname.
+
+log(customers.sort())
+
+
 let vowelArray = [];
 for(let i=0; i<customers.length; i++){
   log(">>"+customers[i].firstname, customers[i].firstname.length)
