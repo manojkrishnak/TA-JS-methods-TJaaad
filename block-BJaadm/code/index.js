@@ -99,6 +99,6 @@ log(peopleGrade.sort((a,b) => b - a))
 log([...peopleGrade].sort((a,b) => b - a))
 
 // Sort the array peopelName in ascending `ABCD..Za....z`
-log([...peopleName].sort((a,b) => b - a))
+log([...peopleName].sort())
 // Sort the array peopelName in ascending `ABCD..Za....z`. Make sure not to mutate the array
 log([...peopleName].sort((a,b) => a - b))
