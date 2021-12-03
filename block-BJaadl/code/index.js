@@ -14,12 +14,12 @@ function log(item){
 }
 
 // - Write a function findLongestWord that takes an array of words and returns the longest word from the array. (Use above array "words" to test it). If there are 2 with the same length, it should return the first occurrence.
-// function findLongestWord(arr){
+function findLongestWord(arr){
+  return [...words].sort((a,b)=> a.length - b.length).pop()
+}
 
-// }
-// let findLongestWord = words.reduce((acc, word) => {  if(word.length > acc){ return  word }}, 0);
-let findLongestWord = words.reduce( (acc,word) => {let w=""; return word.length > acc ? w = word: word.length})
-log("---"+findLongestWord)
+log(findLongestWord(words))
+
 
 // - Convert the above array "words" into an array of length of word instead of word.
 let lengthOfWords = words.map(word =>  word.length);
