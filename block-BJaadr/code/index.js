@@ -1,35 +1,77 @@
 // NOTE: You can only use the (reduce) array method to solve this exercise:
 
+const { houses } = require("./data");
+let got = require("./data");
+let gHouses = got.houses;
+
+function log(item){
+  console.log(item);
+}
+
 function countAllPeople() {
   // your code goes here
+  return gHouses.reduce((acc, cv) => { return acc+cv.people.length}, 0);
+
 }
 
 function peopleByHouses() {
   // your code goes here
+  let houses = {};
+  return gHouses.reduce((acc, cv) => { 
+    houses[cv.name] = cv.people.length;
+    return houses;}, 0)
 }
 
 function everyone() {
   // your code goes here
+  let allNames = [];
+  return gHouses.reduce((acc, cv) => {
+    cv.people.map(v => allNames.push(v.name));
+    return allNames}, 0)
+}
+
+function namesWithLetter(str1, str2){
+  let namesArray = [];
+   houses.reduce(
+    (acc, cv) => (cv.people.map(v => (v.name.includes(str1)|| v.name.includes(str2))? namesArray.push(v.name): false)), 0);
+    return namesArray;
+}
+
+function surnameWithLetter(str) {
+  // your code goes here
+  let namesArray = [];
+  houses.reduce(
+   (acc, cv) => (cv.people.map(v => (v.name.split(" ")[1].startsWith(str))? namesArray.push(v.name): false)), 0);
+   return namesArray;
 }
 
 function nameWithS() {
   // your code goes here
+  return namesWithLetter("s", "S");
 }
 
 function nameWithA() {
   // your code goes here
+  return namesWithLetter("a", "A");
+
 }
 
 function surnameWithS() {
   // your code goes here
+  return surnameWithLetter("S");
 }
 
 function surnameWithA() {
   // your code goes here
+  return surnameWithLetter("A");
 }
 
 function peopleNameOfAllHouses() {
   // your code goes here
+  let houses = {};
+  return gHouses.reduce((acc, cv) => { 
+    houses[cv.name] = cv.people.map( v => v.name);
+    return houses;}, 0)
 }
 
 // Testing your result after writing your function
