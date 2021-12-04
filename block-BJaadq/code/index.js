@@ -1,35 +1,95 @@
 // NOTE: You can not use reduce methods to solve this exercise
+let got = require("./data");
+function log(item){
+  console.log(item);
+}
+
+log(got)
 
 function countAllPeople() {
   // your code goes here
+  let total = 0;
+  for(let i=0; i<got.houses.length; i++){
+    total += got.houses[i].people.length;
+  }
+  return total;
 }
+
 
 function peopleByHouses() {
   // your code goes here
+  let houses = {};
+  for(let i=0; i<got.houses.length; i++){
+      houses[got.houses[i].name] = got.houses[i].people.length;
+  }
+  return houses;
 }
 
 function everyone() {
   // your code goes here
+  let peopleNames = [];
+  for(let i=0; i<got.houses.length - 1; i++){
+    for(let j=0; j<got.houses[i].people.length - 1; j++){
+      peopleNames.push(got.houses[i].people[j].name)
+    }
+  }
+  log("total people in GOT "+peopleNames.length)
+  return peopleNames;
 }
 
+
+function nameEndsWithLetter(str1, str2){
+  let peopleNamesWith = [];
+  for(let i=0; i<got.houses.length - 1; i++){
+    for(let j=0; j<got.houses[i].people.length - 1; j++){
+      let condition = got.houses[i].people[j].name.includes((str1)) || got.houses[i].people[j].name.includes((str2));
+      condition ? peopleNamesWith.push(got.houses[i].people[j].name) : false;
+    }
+  }
+  console.log(`People whose names ending with ${str1} or ${str2} are ${peopleNamesWith.length}`)
+  return peopleNamesWith;
+}
+
+function suramesWithLetter(str){
+  let surnameWithLetter = [];
+  for(let i=0; i<got.houses.length; i++){
+    for(let j=0; j<got.houses[i].people.length; j++){
+      let condition = got.houses[i].people[j].name.split(" ")[1].startsWith((str));
+      condition ? surnameWithLetter.push(got.houses[i].people[j].name) : false;
+    }
+  }
+  console.log(`People whose names ending with ${str} are ${surnameWithLetter.length}`)
+  return surnameWithLetter;
+}
 function nameWithS() {
   // your code goes here
+  return nameEndsWithLetter("s", "S");
+  
 }
 
 function nameWithA() {
   // your code goes here
+  return nameEndsWithLetter("a", "A");
 }
 
 function surnameWithS() {
   // your code goes here
+  return suramesWithLetter("S")
 }
 
 function surnameWithA() {
   // your code goes here
+  return suramesWithLetter("A")
 }
 
 function peopleNameOfAllHouses() {
   // your code goes here
+  let houses = {};
+  for(let i=0; i<got.houses.length; i++){
+      houses[got.houses[i].name] = got.houses[i].people.map(people => people.name);
+  }
+  return houses;
+
 }
 
 // Testing your result after writing your function
