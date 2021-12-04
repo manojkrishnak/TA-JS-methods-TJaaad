@@ -13,9 +13,15 @@ let persons = [
   { name: 'Arya', grade: 14, sex: 'F' },
 ];
 
+function log(item){
+  console.log(item)
+}
+
 // NOTE: Use reduce method whereever you can to solve this exercise:
 
 // Find the average grade
+let avgGrade = persons.reduce((acc, person) => acc + person.grade, 0) / persons.length;
+log(avgGrade)
 
 // Find the average grade of male
 
@@ -52,6 +58,20 @@ Output:
 {banana: 2, cherry: 3, orange: 3, apple: 2, fig: 1}
 */
 
+function createObj(arr){
+  let fruitsCount = {};
+  for(let i=0; i<arr.length; i++){
+    if(!Object.keys(fruitsCount).includes(arr[i])){
+      fruitsCount[arr[i]] = 1;
+    }else{
+      fruitsCount[arr[i]] = fruitsCount[arr[i]] + 1;
+    }
+  }
+  return fruitsCount
+}
+
+let fruitsObj = createObj(fruitBasket);
+
 /* 
 
 Use the fruitBasket array to create an array of array. Each array will contain two values name of fruit and number of times
@@ -62,14 +82,38 @@ Output:
 [['banana', 2], ['cherry', 3], ['orange', 3], ['apple', 2], ['fig', 1]]
 */
 
+// log(Object.keys(fruitsObj))
+
+function fruitsArrayOfArray(obj){
+  let arrayOfArray = [];
+  let keys = Object.keys(obj);
+  for(let i= 0; i< keys.length; i++){
+    arrayOfArray.push(
+      [
+        keys[i], obj[keys[i]]
+      ]
+    )
+  }
+  return arrayOfArray;
+}
+
+// log(fruitsArrayOfArray(fruitsObj))
+
 const data = [
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 9],
-  [10, 11, 12],
+  [10, 11, 12]
 ];
 
 // Using reduce flat data array
+
+function flatArray(arr){
+  let newArray = [];
+  return arr.reduce((acc, currentValue) => {currentValue
+            .map( cv => newArray.push(cv));
+                return newArray;}, [])}
+// log(flatArray(data));
 
 const dataTwo = [
   [1, 2, 3],
@@ -80,8 +124,16 @@ const dataTwo = [
 
 // Using reduce flat dataTwo array
 
-/*
+function doubleFlatArray(arr) {
+  let newArray = [];
+  return arr.reduce((acc, currentValue) => {
+    currentValue.map((cv) => (typeof cv !== "object")? newArray.push(cv) : cv.map( v => newArray.push(v)));
+    return newArray;
+  }, []);
+}
+log(doubleFlatArray(dataTwo));
 
+/*
 Create these functions which accepts a number value and returns a number value:
   - `increment` adds one to the input value
   - `double` doubles the input value
@@ -89,6 +141,7 @@ Create these functions which accepts a number value and returns a number value:
   - `triple` triples the input 
   - `half` converts the value to half and return the integer value not decimal (use Math.round(21.5) => 21)
 */
+
 
 let pipeline = [
   increment,
@@ -115,18 +168,38 @@ EXAMPLE:
   ...
 */
 
-let pipeline2 = [
-  increment,
-  half,
-  double,
-  decrement,
-  decrement,
-  triple,
-  double,
-  triple,
-  half,
-  increment,
-  triple,
-];
+function mathOperations(funcsArr, initialValue){
+  let num = initialValue;
+  funcsArr.forEach(function(func){
+      if(func === increment){
+        num += 3;
+      }else if(func === "double"){
+        num = double(num)
+      }else if(func === "decrement"){
+        num -= 1;
+      }else if(func === "triple"){
+        num =  num * 3;
+      }else if(func === "half"){
+        num =  num / 2;
+      }
+    })
+    return num;
+}
+
+log(mathOperations(pipeline, 3));
+
+// let pipeline2 = [
+//   increment,
+//   half,
+//   double,
+//   decrement,
+//   decrement,
+//   triple,
+//   double,
+//   triple,
+//   half,
+//   increment,
+//   triple,
+// ];
 
 // Find the output using pipeline2 the initial value if 8
